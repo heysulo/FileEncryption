@@ -7,6 +7,8 @@ sulochana.456@live.com
 import argparse
 from time import gmtime, strftime
 import os.path
+import hashlib
+import getpass
 import PIL.Image
 import sys
 
@@ -24,6 +26,13 @@ def stamp(mode=0):
         msg = "ERRO"
     return strftime("[" + msg + " %H:%M:%S" + "]", gmtime())
 
+def getpasswordhash():
+    m = hashlib.md5()
+    print stamp(), "Prompting user for password"
+    pwd = getpass.getpass()
+    m.update(pwd)
+    print m.hexdigest()
+
 def main():
     print stamp(), "Initiating"
     parser = argparse.ArgumentParser()
@@ -38,6 +47,7 @@ def main():
             print stamp(), "Searching for the file", args.input
             if (os.path.isfile(args.input)):
                 print stamp(), "The file", args.input, "Found"
+                getpasswordhash()
 
             else:
                 print stamp(2), "The file", args.input, "was not found"
