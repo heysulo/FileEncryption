@@ -1,11 +1,10 @@
-f = open("file", "r+b")
-print f.read()
-f.seek(0)
-f.write("s")
-f.write("u")
-f.write("l")
-f.write("o")
-f.write("c")
-f.write("h")
-f.seek(0)
-print f.read()
+def stringtobinary(txt):
+    out = ""
+    for c in list(txt):
+        tmp = bin(ord(c))[2:]
+        out += "0"*(8-len(tmp))+tmp+" "
+    return out
+
+f = open("Airplanes.mp3", "r+b")
+for i in range(100):
+    print stringtobinary(f.read(32))
